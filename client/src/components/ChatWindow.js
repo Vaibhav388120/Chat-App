@@ -1,26 +1,20 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import SendIcon from '@material-ui/icons/Send';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
 import InputLabel from '@mui/material/InputLabel';
-import {io} from 'socket.io-client';
 import { useEffect, useState } from 'react';
+import {useOutletContext} from 'react-router-dom';
 export default function ChatWindow(){
-    const[socket,setSocket]=useState(null);
+    const {socket}=useOutletContext();
     const[message,setMessage]=useState('');
     const[chat,setChat]=useState([]);
     const[typing,setTyping]=useState(false);
 
-    useEffect(()=>{
-        setSocket(io('http://localhost:4000'));
-       
-      },[])
+   
     
       useEffect(()=>{
         if(!socket) return;
@@ -53,7 +47,7 @@ export default function ChatWindow(){
         );
       }
     return(
-        <Box sx={{display:'flex', justifyContent:'center'}}>
+        
         <Card sx={{padding:2,marginTop:10,width:'60%',backgroundColor:'gray'}}>
         <Box sx={{marginBottom:5}}>
         {
@@ -88,6 +82,5 @@ export default function ChatWindow(){
           />
       </Box>
       </Card>
-      </Box>
     )
 }

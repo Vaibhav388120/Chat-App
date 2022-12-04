@@ -1,22 +1,24 @@
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import SendIcon from '@material-ui/icons/Send';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
+import Box from '@mui/material/Box';
+import {Outlet} from 'react-router-dom';
+import Header from './components/Header';
+import {useEffect,useState} from 'react';
 import {io} from 'socket.io-client';
-import { useEffect, useState } from 'react';
-import ChatWindow from './components/ChatWindow';
+
 function App() {
+  const[socket,setSocket]=useState(null);
+  useEffect(()=>{
+    setSocket(io('http://localhost:4000'));
+  },[])
 
 
   return (
     <div>
       <Container>
-       <ChatWindow/>
+      <Header/>
+      <Box sx={{display:'flex', justifyContent:'center'}}>  
+       <Outlet context={{socket}}/>
+       </Box>
       </Container>
     </div>
   );
