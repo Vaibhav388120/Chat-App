@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import Cookies from 'js-cookies';
+import Cookies from 'js-cookie';
 import { useEffect,useState } from 'react';
 import {Link,useNavigate} from 'react-router-dom';
 import{v4 as uuidv4} from 'uuid';
@@ -39,12 +39,12 @@ export default function Header({socket,userId,setUserId}){
     function login(){
         const userId=uuidv4();
         setUserId(userId);
-        Cookies.setItem('userId',userId);
+        Cookies.set('userId',userId);
         navigate('/');
     }
     function logout(){
         setUserId(null);
-        Cookies.removeItem('userId');
+        Cookies.remove('userId');
         navigate('/');
     }
     return(
